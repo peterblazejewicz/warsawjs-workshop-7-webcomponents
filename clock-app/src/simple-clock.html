@@ -2,7 +2,7 @@
 
 <dom-module id="simple-clock">
   <template>
-    <style>
+    <style >
       :host {
         display: block;
         height: 100px;
@@ -10,8 +10,7 @@
         margin: 1rem;
         font-family: arial;
         overflow: auto;
-        --theme: red;
-        background: var(--theme, red);
+        background: var(--simple-clock-theme);
       }
 
       .clock {
@@ -22,7 +21,7 @@
       }
 
     </style>
-    <div class="clock">[[time]]</div>
+    <div class="clock">[[alarmtime]]</div>
   </template>
 
   <script>
@@ -33,9 +32,10 @@
 
       static get properties() {
         return {
-          time: {
+          alarmtime: {
             type: String,
-            notify: true
+            notify: true,
+            value: '00:00:00'
           },
           theme: {
             type: String,
@@ -49,12 +49,12 @@
         setInterval(() => {
               let date = new Date();
               let timeNow = date.toLocaleTimeString();
-              this.time = timeNow;
+              this.alarmtime = timeNow;
             }, 1000);
       }
 
       _themeChanged() {
-        this.style.setProperty(`--theme`, this.theme);
+        document.documentElement.style.setProperty(`--simple-clock-theme`, this.theme);
       }
 
     }

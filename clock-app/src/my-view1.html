@@ -24,13 +24,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div class="card">
 
-      <simple-clock time="00:00:00" theme="red"></simple-clock>
+      <simple-clock id="clock" alarmtime="[[alarmtime]]" theme="red"></simple-clock>
 
-      <simple-clock time="12:12:12" theme="blue"></simple-clock>
+      [[alarmtime]]
 
-      <simple-clock time="00:00:00" theme="green"></simple-clock>
-
-      <simple-clock time="00:00:00" theme="rebeccapurple"></simple-clock>
 
     </div>
 
@@ -39,6 +36,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     class MyView1 extends Polymer.Element {
       static get is() { return 'my-view1'; }
+
+      static get properties() {
+        return {
+          alarmtime: {
+            type: String,
+            observer: '_alarmtimeChanged'
+          }
+        }
+      }
+      /**
+       * simple binding to clock element 
+       */
+      _alarmtimeChanged() {
+        console.log(this.alarmtime);
+      }
     }
 
     window.customElements.define(MyView1.is, MyView1);
