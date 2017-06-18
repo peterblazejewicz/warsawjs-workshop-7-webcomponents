@@ -1,16 +1,19 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<script src="simple-clock-time-parser.js"></script>
 
 <dom-module id="simple-clock">
   <template>
     <style >
       :host {
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         height: 100px;
-        color: white;
         margin: 1rem;
-        font-family: arial;
-        overflow: auto;
-        background: var(--simple-clock-theme);
+        color: white;
+        background: var(--simple-clock-theme, blue);
+        font-family: Arial, Helvetica, sans-serif;
+        
       }
 
       .clock {
@@ -21,21 +24,21 @@
       }
 
     </style>
-    <div class="clock">[[alarmtime]]</div>
+    <div class="clock">[[time]]</div>
   </template>
 
   <script>
 
-    class SimpleClock extends Polymer.Element {
+    class SimpleClock extends Polymer.mixinBehaviors([SimpleClockTimeParser],Polymer.Element) {
 
       static get is() { return 'simple-clock'; }
 
       static get properties() {
         return {
-          alarmtime: {
+          time: {
             type: String,
-            notify: true,
-            value: '00:00:00'
+            // broadcast changes upward
+            notify: true
           },
           theme: {
             type: String,
@@ -47,9 +50,8 @@
       ready() {
         super.ready();
         setInterval(() => {
-              let date = new Date();
-              let timeNow = date.toLocaleTimeString();
-              this.alarmtime = timeNow;
+              let timeNow = new Date().toLocaleTimeString();
+              this.time = timeNow;
             }, 1000);
       }
 

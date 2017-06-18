@@ -11,45 +11,70 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="simple-clock.html">
+<script src="simple-clock-time-parser.js"></script>
 
 <dom-module id="my-view1">
   <template>
     <style include="shared-styles">
       :host {
         display: block;
-
         padding: 10px;
+      }
+      :host([active]) #alarm {
+        background: red;
+        color: white;
+        animation: active 1s ease-in infinite;
+      }
+
+      @keyframes active {
+        0%   { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(1.2); }
       }
     </style>
 
+    
     <div class="card">
+      <simple-clock id="clockOne" time="12:12:12" theme="red"></simple-clock>
+    </div>
 
-      <simple-clock id="clock" alarmtime="[[alarmtime]]" theme="red"></simple-clock>
-
-      [[alarmtime]]
-
+    <div class="card" id="alarm">
+      <h2>Sample alarm clock</h2>
+      <p>The alarm is set to: [[alarm]]</p>
+      <p>The alarm is active: [[active]]</p>
 
     </div>
 
   </template>
 
   <script>
-    class MyView1 extends Polymer.Element {
+    class MyView1 extends Polymer.mixinBehaviors([SimpleClockTimeParser], Polymer.Element) {
       static get is() { return 'my-view1'; }
 
       static get properties() {
         return {
-          alarmtime: {
-            type: String,
-            observer: '_alarmtimeChanged'
+          alarm: String,
+          active: {
+            type: Boolean,
+            notify: true,
+            value: false,
+            reflectToAttribute: true
           }
         }
       }
-      /**
-       * simple binding to clock element 
-       */
-      _alarmtimeChanged() {
-        console.log(this.alarmtime);
+
+      ready() {
+        super.ready();
+        this.$.clockOne
+          .addEventListener('time-changed', this._timeChanged.bind(this));
+      }
+
+      _timeChanged({detail: { value: time} } = event) {
+        // use helper from mixin
+        let currentTime = this.parseTime(time);
+        let alarm = this.parseTime(this.alarm);
+        if(currentTime && alarm) {
+          this.active = (currentTime.getTime() >= alarm.getTime());
+        }
       }
     }
 
