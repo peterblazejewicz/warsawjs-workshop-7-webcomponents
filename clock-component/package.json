@@ -1,18 +1,23 @@
 {
-  "name": "clock-component",
-  "version": "1.0.0",
-  "description": "A simple web component",
+  "name": "simple-clock",
+  "version": "0.0.1",
+  "description": "simple clock for testing",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "browser-sync start --server ."
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alpostek/warsawjs-workshop-web-components.git"
+  },
+  "author": "aleksandra postek",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alpostek/warsawjs-workshop-web-components/issues"
+  },
+  "homepage": "https://github.com/alpostek/warsawjs-workshop-web-components#readme",
   "dependencies": {
-    "webcomponents.js-v1": "^0.7.21"
-  },
-  "devDependencies": {
-    "browser-sync": "^2.18.12"
+    "http-server": "^0.10.0",
+    "webcomponents.js": "^0.7.24"
   }
 }

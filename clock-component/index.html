@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title></title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="node_modules/webcomponents.js-v1/dist/webcomponents-lite.min.js"></script>
-    </head>
-    <body>
-    <h1>Hello Web Components</h1>
-    </body>
+<html>
+  <head>
+      <title>Simple Clock</title>
+      <script src = "node_modules/webcomponents.js/webcomponents-lite.min.js"></script>
+      <!-- <import href="components/simple-clock"></import> -->
+      <link rel="import" href="components/simple-clock.html">
+  </head>
+  <body>
+      <simple-clock time="12:00:00" theme="red"></simple-clock>
+  </body>
 </html>
