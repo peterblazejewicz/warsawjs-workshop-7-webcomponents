@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="shared-styles.html">
 <link rel="import" href="simple-clock.html">
 <script src="simple-clock-time-parser.js"></script>
+<link rel="import" href="custom-progress-bar.html">
 
 <dom-module id="my-view1">
   <template>
@@ -32,7 +33,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    
+    <div class="card">
+      <custom-progress-bar progress="50"></custom-progress-bar>
+    </div>
+
+    <div class="card">
+      <custom-progress-bar progress="50"></custom-progress-bar>
+    </div>
+
     <div class="card">
       <simple-clock id="clockOne" time="12:12:12" theme="red"></simple-clock>
     </div>
