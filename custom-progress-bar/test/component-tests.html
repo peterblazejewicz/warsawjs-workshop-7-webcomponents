@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Component Tests</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <link rel="import" href="../custom-progress-bar.html">
+</head>
+<body>
+    <custom-progress-bar progress="50" id="fixture"></custom-progress-bar>
+    <script>
+        suite('<custom-progress-bar>', function() {
+        test('it works!', function() {
+            assert.isTrue(document.getElementById('fixture').progress === '50');
+        });
+        });
+    </script>
+</body>
+</html>

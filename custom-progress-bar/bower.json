@@ -1,0 +1,20 @@
+{
+  "name": "custom-progress-bar",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Peter Blazejewicz"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/peterblazejewicz/warsawjs-workshop-7-webcomponents",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "web-component-tester": "^6.0.0"
+  }
+}

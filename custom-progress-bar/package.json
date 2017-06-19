@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "browser-sync start --server . --files=*.html --index=index.html"
+    "start": "browser-sync start --server . --files=*.html --index=index.html",
+    "test": "wct"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^2.18.12"
+    "browser-sync": "^2.18.12",
+    "web-component-tester": "^6.0.0"
+  },
+  "dependencies": {
+    "webcomponentsjs": "^1.0.2"
   }
 }

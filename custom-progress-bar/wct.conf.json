@@ -1,0 +1,13 @@
+{
+    "plugins": {
+        "local": {
+        "browsers": ["chrome"]
+        }
+    },
+    "browserOptions": {
+        "browserName" : "chrome",
+        "chromeOptions" : {
+            "args" : ["start-maximized"]
+        }
+    }
+}
