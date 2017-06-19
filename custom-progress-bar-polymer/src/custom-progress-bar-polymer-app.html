@@ -1,0 +1,39 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="custom-progress-bar.html">
+
+<dom-module id="custom-progress-bar-polymer-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+    <p>Below we are using custom vanilla web components</p>
+    <custom-progress-bar progress="30"></custom-progress-bar>
+    <hr>
+    <custom-progress-bar progress="90"></custom-progress-bar>
+    <hr>
+    <custom-progress-bar progress="50"></custom-progress-bar>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class CustomProgressBarPolymerApp extends Polymer.Element {
+      static get is() { return 'custom-progress-bar-polymer-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'custom-progress-bar-polymer-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(CustomProgressBarPolymerApp.is, CustomProgressBarPolymerApp);
+  </script>
+</dom-module>

@@ -1,0 +1,84 @@
+<template>
+    <style>
+         :host {
+            --progress: 0%;
+            display: inline-block;
+            width: var(--custom-progress-bar-width, 5rem);
+            height: var(--custom-progress-bar-height, 1rem);
+        }
+
+        .progress {
+            display: inline-block;
+            position: relative;
+            border: solid 1px #000;
+            padding: 1px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .progress>.bar {
+            background: var(--custom-progress-bar-background, #9cf);
+            width: var(--progress);
+            height: 100%;
+        }
+
+        .progress>.label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            line-height: 1.1rem;
+        }
+    </style>
+    <div class="progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="bar"></div>
+        <div class="label">0%</div>
+    </div>
+</template>
+<script>
+    let importedDoc = document.currentScript.ownerDocument;
+    class CustomProgressBar extends HTMLElement {
+        static get is() {
+            return 'custom-progress-bar'
+        }
+        static get template() {
+            return importedDoc
+                .querySelector('template')
+                .content.cloneNode(true);
+        }
+        static get observedAttributes() {
+            return ['progress'];
+        }
+
+        constructor() {
+            super();
+            const shadowRoot = this.attachShadow({
+                mode: 'closed'
+            });
+            shadowRoot.appendChild(CustomProgressBar.template);
+            this._progressElement = shadowRoot.querySelector('.progress');
+            this._label = shadowRoot.querySelector('.label');
+            this._bar = shadowRoot.querySelector('.bar');
+        }
+
+        attributeChangedCallback(attr, oldValue, newValue) {
+            if (attr === 'progress') {
+                this.progress = newValue;
+            }
+        }
+
+        get progress() {
+            return this._progressElement.getAttribute('aria-valuenow');
+        }
+
+        set progress(value) {
+            value = Math.max(0, Math.min(100, +value));
+            this._progressElement.setAttribute('aria-valuenow', value);
+            this.style.setProperty('--progress', `${value}%`);
+            this._label.textContent = value + '%';
+        }
+    };
+    customElements.define(CustomProgressBar.is, CustomProgressBar);
+</script>
